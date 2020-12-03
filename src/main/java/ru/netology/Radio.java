@@ -1,76 +1,78 @@
 package ru.netology;
 
-
 public class Radio {
-        private int currentRadio;
-        private int maxRadio;
-        private int minRadio;
-        private int currentVolume;
-        private int maxVolume;
-        private int minVolume;
+    private int station;
+    private int volume;
+    private int numOfStations;
 
-        public int getCurrentRadio() { return currentRadio; }
+    public Radio() {
+        numOfStations = 10;
 
-        public void setCurrentRadio(int currentRadio) { this.currentRadio = currentRadio; }
+    }
 
-        public int getMaxRadio() { return maxRadio; }
+    public Radio(int numOfStations){
 
-        public void setMaxRadio(int maxRadio) { this.maxRadio = maxRadio; }
+        this.numOfStations = numOfStations;
+    }
 
-        public int getMinRadio() { return minRadio; }
+    public int getNumOfStations() {
+        return numOfStations;
+    }
 
-        public void setMinRadio(int minRadio) { this.minRadio = minRadio; }
+    public void setNumOfStations(int numOfStations) {
+        this.numOfStations = numOfStations;
+    }
 
-        public int getCurrentVolume() { return currentVolume; }
+    public int getStation() {
+        return station;
+    }
 
-        public void setCurrentVolume(int currentVolume) { this.currentVolume = currentVolume; }
-
-        public int getMaxVolume() { return maxVolume; }
-
-        public void setMaxVolume(int maxVolume) { this.maxVolume = maxVolume; }
-
-        public int getMinVolume() { return minVolume; }
-
-        public void setMinVolume(int minVolume) { this.minVolume = minVolume; }
-
-
-
-        public void nextCurrentRadio(){
-                if (currentRadio == 9){
-                        this.currentRadio = 0;
-                        return;
-                }
-                this.currentRadio = currentRadio + 1;
+    public void setStation(int station) {
+        if (station > this.numOfStations) {
+            this.station = 0;
+            return;
         }
-
-        public void prevCurrentRadio(){
-                if(currentRadio == 0){
-                        this.currentRadio = 9;
-                        return;
-                }
-                this.currentRadio = currentRadio - 1;
+        if (station < 0) {
+            this.station = this.numOfStations;
+            return;
         }
+        this.station = station;
+    }
 
-        public void increaseCurrentVolume(){
-                if(currentVolume == 10){
-                        return;
-                }
-                this.currentVolume = currentVolume + 1;
-        }
+    public int getVolume() {
+        return volume;
+    }
 
-        public  void decreaseCurrentVolume(){
-                if(currentVolume == 0){
-                        return;
-                }
-                this.currentVolume = currentVolume - 1;
+    public void setVolume(int volume) {
+        if (volume > 100) {
+            return;
         }
+        if (volume < 0) {
+            return;
+        }
+        this.volume = volume;
+    }
+
+
+    public void nextStation() {
+        setStation(this.station + 1);
+    }
+
+
+    public void prevStation() {
+        setStation(this.station - 1);
+    }
+
+
+    public void incVolume() {
+        setVolume(this.volume + 1);
+    }
+
+    public void decVolume() {
+        setVolume(this.volume - 1);
+    }
 
 }
-
-
-
-
-
 
 
 

@@ -8,56 +8,66 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class RadioTest {
     private Radio radio = new Radio();
+    private int actual;
+
 
     @ParameterizedTest
     @CsvSource(
             value = {
-                    "'expected, currentRadio', 7, 8",
-                    "'expected, currentRadio', 9, 0"
+                    "'expected, Radio', 9, 10",
+                    "'expected, Radio', 10, 0"
             }
     )
-    void nextCurrentRadio(String test, int currentRadio, int expected) {
-        radio.setCurrentRadio(currentRadio);
-        radio.nextCurrentRadio();
-        assertEquals(expected, radio.getCurrentRadio());
-    }
-    @ParameterizedTest
-    @CsvSource(
-            value = {
-                    "'expected, currentRadio', 7, 6",
-                    "'expected, currentRadio', 0, 9"
-            }
-    )
-    void shouldPrevCurrentRadio(String test, int currentRadio, int expected) {
-        radio.setCurrentRadio(currentRadio);
-        radio.prevCurrentRadio();
-        assertEquals(expected, radio.getCurrentRadio());
+    void nextRadio(String test, int station, int expected) {
+        radio.setStation(station);
+        radio.nextStation();
+        assertEquals(expected, radio.getStation());
     }
 
     @ParameterizedTest
     @CsvSource(
             value = {
-                    "'expected, currentVolume', 10, 10",
-                    "'expected, currentRadio', 8, 9"
+                    "'expected, Radio', 8, 7",
+                    "'expected, Radio', 0, 10"
             }
     )
-
-    void increaseCurrentVolume(String test, int currentVolume, int expected) {
-        radio.setCurrentVolume(currentVolume);
-        radio.increaseCurrentVolume();
-        assertEquals(expected, radio.getCurrentVolume());
+    void shouldPrevRadio(String test, int station, int expected) {
+        radio.setStation(station);
+        radio.prevStation();
+        assertEquals(expected, radio.getStation());
     }
 
     @ParameterizedTest
     @CsvSource(
             value = {
-                    "'expected, currentVolume', 0, 0",
-                    "'expected, currentRadio', 8, 7"
+                    "'expected, Volume', 100, 100",
+                    "'expected, Radio', 21, 22"
             }
     )
-    void decreaseCurrentVolume(String test, int currentVolume, int expected) {
-        radio.setCurrentVolume(currentVolume);
-        radio.decreaseCurrentVolume();
-        assertEquals(expected, radio.getCurrentVolume());
+    void increaseVolume(String test, int volume, int expected) {
+        radio.setVolume(volume);
+        radio.incVolume();
+        assertEquals(expected, radio.getVolume());
     }
+
+    @ParameterizedTest
+    @CsvSource(
+            value = {
+                    "'expected, Volume', 0, 0",
+                    "'expected, Radio', 8, 7"
+            }
+    )
+    void decreaseCurrentVolume(String test, int volume, int expected) {
+        radio.setVolume(volume);
+        radio.decVolume();
+        assertEquals(expected, radio.getVolume());
+    }
+    @Test
+    public void numOfStationsDefault() {
+        Radio radio = new Radio();
+        actual = radio.getNumOfStations();
+        int expected = 10;
+        assertEquals(expected, actual);}
+
 }
+
